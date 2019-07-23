@@ -11,4 +11,4 @@ jinja_env = jinja2.Environment(
 class MainHandler(webapp2.RequestHadler):
     def get(self):
         main_template = jinja_env.get_templates("templates/mainpage.html")
-        self.response.write(tepm)
+        self.response.write(main_template.render())
