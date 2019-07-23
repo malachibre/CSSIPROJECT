@@ -6,5 +6,5 @@ class CRN(ndb.Model):
     days = ndb.StringProperty(required = True, repeated = True)
     times = ndb.DatetTimeProperty(required = True)
 
-class USER(ndb.Model):
+class User(ndb.Model):
     courses = ndb.KeyProperty(CRN, repeated = True)
