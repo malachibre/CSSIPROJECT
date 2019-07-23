@@ -13,8 +13,6 @@ class MainHandler(webapp2.RequestHandler):
         main_template = jinja_env.get_template("templates/mainpage.html")
         self.response.write(main_template.render())
 
-
-
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
 ], debug=True)
