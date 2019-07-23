@@ -8,7 +8,7 @@ jinja_env = jinja2.Environment(
     autoescape=True)
 
 
-class MainHandler(webapp2.RequestHadler):
+class MainHandler(webapp2.RequestHandler):
     def get(self):
         main_template = jinja_env.get_templates("templates/mainpage.html")
         self.response.write(main_template.render())
