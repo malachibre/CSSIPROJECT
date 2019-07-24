@@ -33,17 +33,14 @@
           center: {lat: 33.9480, lng: -83.3773}
         });
 
-        var marker = new google.maps.Marker({
-          position: {lat: 33.944286, lng: -83.376376},
-          map: map,
-          title: 'Hello World!'
-        });
+        {% for loc in locs %}
+          var marker = new google.maps.Marker({
+            position: {lat: {{locs[loc][0]}}, lng: {{locs[loc][1]}}},
+            map: map,
+            title: 'Hello World!'
+          });
+        {% endfor %}
 
-        var marker = new google.maps.Marker({
-          position: {lat: 33.946335, lng: -83.372167},
-          map: map,
-          title: 'Hello World!'
-        });
 
       }
     </script>
