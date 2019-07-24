@@ -2,7 +2,6 @@ const newInput = () => {
   var it = document.createElement("INPUT");
   var br = document.createElement("br");
   // <!--- something like this --->
-  var button = document.getElementById(textnum);
   // document.body.removeElement(button);
   // <!--- -->
   it.setAttribute("type", "number");
@@ -14,5 +13,4 @@ const newInput = () => {
   // <!--- -->
 }
 
-button = document.querySelector("#textnum");
-button.addEventListener("click", newInput);
+button = document.querySelector("#addCRN");
