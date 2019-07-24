@@ -1,7 +1,10 @@
 from google.appengine.ext import ndb
+from google.appengine.api import users
 import jinja2
 import webapp2
 import os
+
+
 
 
 class CRN(ndb.Model):
@@ -79,6 +82,13 @@ buildings = {
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+        user = users.get_current_user()
+        if user:
+          self.response.write("You're logged in!")
+        else:
+          self.response.write("You're not logged in - please do so.")
+
+
         main_template = jinja_env.get_template("templates/mainpage.html")
         template_dict = {
           'locs': {'loc1': buildings['53'], 'loc2': buildings['56']}
