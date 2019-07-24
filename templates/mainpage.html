@@ -7,24 +7,49 @@
   <body>
     <h2>Enter your CRN(s):</h2>
     <form method="post">
-            <input type = "number"
-                 value = "text here"><br>
-            <input type = "number"
-                 value = "text here"><br>
-            <input type = "number"
-                 value = "text here"><br>
-            <input type = "number"
-                  value = "text here"><br>
-            <input type = "number"
-                  value = "text here"><br>
-            <input id="addCRN" type="button" value="Add CRN" onclick="newInput();"/>
+        <input type = "number"
+             value = "text here"><br>
+        <input type = "number"
+             value = "text here"><br>
+        <input type = "number"
+             value = "text here"><br>
+        <input type = "number"
+              value = "text here"><br>
+        <input type = "number"
+              value = "text here"><br>
+        <input id="addCRN" type="button" value="Add CRN" onclick="newInput();"/>
        <!-- <button id="textnum" onclick="newInput">Add CRN</button> -->
         <!-- <input type="submit" value="Submit!"> -->
       <!-- <a href="AddedCourse.html">Submit</a><br><br> -->
         <!-- <button type="submit">Submit</button><br><br> -->
         <button type="submit" formaction="/redirect">Submit</button><br><br>
       </form>
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3309.732416548736!2d-83.37951614914748!3d33.948009730567904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f6136038fba6bf%3A0xdf849d68bb40ef74!2sUniversity+of+Georgia!5e0!3m2!1sen!2sus!4v1563910470009!5m2!1sen!2sus" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+      <div id="map_canvas" style="width: 800px; height:500px;"></div>
+      <script>
+
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map_canvas'), {
+          zoom: 15,
+          center: {lat: 33.9480, lng: -83.3773}
+        });
+
+        var marker = new google.maps.Marker({
+          position: {lat: 33.944286, lng: -83.376376},
+          map: map,
+          title: 'Hello World!'
+        });
+
+        var marker = new google.maps.Marker({
+          position: {lat: 33.946335, lng: -83.372167},
+          map: map,
+          title: 'Hello World!'
+        });
+
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB17dJU7iK9tgYoQkoRzy-2597DHx4ePMQ&callback=initMap">
+    </script>
     <script src="/static/main.js"></script>
   </body>
 </html>
