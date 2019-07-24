@@ -40,13 +40,13 @@ C25894.put()
 C42135 = CRN(name= "HIST2111", bld_num = 58, days = ['m', 'w'])
 C42135.put()
 
-C33739 = CRN(name="HIST2111", "bld_num = 66, days = ['t', 'r'])
+C33739 = CRN(name="HIST2111", bld_num = 66, days = ['t', 'r'])
 C33739.put()
 
 C10065 = CRN(name= "BIOL1103", bld_num = 1035, days = ['t', 'r'])
 C10065.put()
 
-C10098 = CRN(name="BIOL1103", bld_num = 1035 days = ['m', 'w', 'f'])
+C10098 = CRN(name="BIOL1103", bld_num = 1035, days = ['m', 'w', 'f'])
 C10098.put()
 
 
