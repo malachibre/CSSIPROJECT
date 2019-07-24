@@ -34,6 +34,12 @@ class MainHandler(webapp2.RequestHandler):
         main_template = jinja_env.get_template("templates/mainpage.html")
         self.response.write(main_template.render())
 
+class RedirectHandler(webapp2.RequestHandler):
+    def get(self):
+        redirect_template = jinja_env.get_template("templates/AddedCourse.html")
+        self.response.write(redirect_template.render())
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
+    ('/redirect', RedirectHandler),
 ], debug=True)
