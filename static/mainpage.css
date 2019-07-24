@@ -1,0 +1,8 @@
+body {
+  background-color: rgb(176,62, 66);
+}
+
+#map_canvas{
+  width: 800px;
+  height: 500px;
+}
