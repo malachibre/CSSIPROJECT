@@ -21,7 +21,7 @@
                   value = "text here"><br>
             <input name = "CRN5" type = "number"
                   value = "text here"><br>
-            <input id="addCRN" type="button" value="Add CRN" onclick="newInput();"/>
+            <input id="addCRN" type="button" value="Add CRN"/>
        <!-- <button id="textnum" onclick="newInput">Add CRN</button> -->
         <!-- <input type="submit" value="Submit!"> -->
       <!-- <a href="AddedCourse.html">Submit</a><br><br> -->
@@ -57,6 +57,7 @@
        var id_token = googleUser.getAuthResponse().id_token;
        console.log("ID Token: " + id_token);
       }
+
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map_canvas'), {
           zoom: 15,
@@ -69,8 +70,8 @@
             map: map,
             title: 'Hello World!'
           });
+          markers.push(marker);
         {% endfor %}
-
 
       }
     </script>
