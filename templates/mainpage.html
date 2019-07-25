@@ -8,20 +8,25 @@
     <link rel="stylesheet" href="static/mainpage.css"/>
     <title></title>
     <img id="logo" alt="logo" src="static/logo.png"/>
-  </head>
+  </head><br><br>
   <body>
-    <h2>Enter your CRN(s):</h2>
+    <div>
+    <h2>Welcome to UniRoutes!<h2><br>
+    </div>
+
+    <div class="form">
+    <h3>Enter your CRN(s):</h3>
     <form method = "post" action = "/redirect">
             <input name = "CRN1" type = "number"
-                 value = "text here"><br>
+                 placeholder="12345"><br>
             <input name = "CRN2" type = "number"
-                 value = "text here"><br>
+                 placeholder="12345"><br>
             <input name = "CRN3" type = "number"
-                 value = "text here"><br>
+                 placeholder="12345"><br>
             <input name = "CRN4" type = "number"
-                  value = "text here"><br>
+                  placeholder="12345"><br>
             <input name = "CRN5" type = "number"
-                  value = "text here"><br>
+                  placeholder="12345"><br>
             <input id="addCRN" type="button" value="DELETE COURSES" onclick="deleteMarkers();"/>
        <!-- <button id="textnum" onclick="newInput">Add CRN</button> -->
         <!-- <input type="submit" value="Submit!"> -->
@@ -29,15 +34,17 @@
         <!-- <button type="submit">Submit</button><br><br> -->
         <button type="submit" formaction="/redirect">SUBMIT</button><br><br>
       </form>
-
+    </div>
+    <div class="weekdays">
       <h3> Select the day of the week in which you want to see your route!</h3>
       <div class="btn-group">
-        <button>Monday</button><br>
-        <button>Tuesday</button><br>
-        <button>Wednesday</button><br>
-        <button>Thursday</button><br>
-        <button>Friday</button><br>
+        <button onclick="removeAllButLet('M');">Monday</button><br>
+        <button onclick="removeAllButLet('T');">Tuesday</button><br>
+        <button onclick="removeAllButLet('W');">Wednesday</button><br>
+        <button onclick="removeAllButLet('T');">Thursday</button><br>
+        <button onclick="removeAllButLet('F');">Friday</button><br>
       </div>
+    </div>
 
       <div id="map_canvas" style="width: 800px; height:500px;"></div>
       <div id="login_button" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
@@ -64,6 +71,8 @@
       let map;
       let pos;
       let markers = []
+      let randNum;
+      let title;
       let directionsService;
       let directionsDisplay;
 
@@ -73,22 +82,27 @@
           zoom: 15,
           center: {lat: 33.9480, lng: -83.3773}
         });
-        colors = ['green', 'blue', 'black', 'brown']
-        let title;
+        colors = ['green', 'blue', 'black', 'brown', 'yellow']
+
         {% for course in courses %}
-          title = '{{courses[course][0]}}'
+          randNum = Math.floor(Math.random() * colors.length);
+          title = '{{courses[course][0]}}: '
+          {% for day in courses[course][2] %}
+            title += '{{day}}'.toUpperCase();
+          {% endfor %}
           pos = {lat: {{courses[course][1][0]}}, lng: {{courses[course][1][1]}} };
           marker = new google.maps.Marker({
           position: pos,
           map: map,
           label: {
             text: title,
-            color: colors[Math.floor(Math.random() * colors.length)],
+            color: colors[randNum],
             fontSize: "16px",
             fontWeight: "bold"
             }
           });
-          markers.push(marker)
+          colors.pop(colors[randNum]);
+          markers.push(marker);
         {% endfor %}
       }
 
@@ -108,7 +122,6 @@
         });
       }
 
-
       function setMapOnAll(map) {
         for (var i = 0; i < markers.length; i++) {
           markers[i].setMap(map);
@@ -118,6 +131,16 @@
       function deleteMarkers() {
         setMapOnAll(null);
         markers = [];
+      }
+
+      function removeAllButLet(let){
+        setMapOnAll(map);
+        for(let i = 0; i < markers.length; i++){
+          title = markers[i]['label']['text']
+          if(title.indexOf(let, title.indexOf(':')) == -1){
+            markers[i].setMap(null);
+          }
+        }
       }
 
     </script>
