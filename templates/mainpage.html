@@ -68,6 +68,8 @@
       let map;
       let pos;
       let markers = []
+      let randNum;
+      let title;
       let directionsService;
       let directionsDisplay;
 
@@ -77,11 +79,12 @@
           zoom: 15,
           center: {lat: 33.9480, lng: -83.3773}
         });
-        colors = ['green', 'blue', 'black', 'brown']
-        let title;
+        colors = ['green', 'blue', 'black', 'brown', 'yellow']
+
         {% for course in courses %}
+          randNum = Math.floor(Math.random() * colors.length);
           title = '{{courses[course][0]}}: '
-          {% for day in courses[course][2]%}
+          {% for day in courses[course][2] %}
             title += '{{day}}'.toUpperCase();
           {% endfor %}
           pos = {lat: {{courses[course][1][0]}}, lng: {{courses[course][1][1]}} };
@@ -90,12 +93,13 @@
           map: map,
           label: {
             text: title,
-            color: colors[Math.floor(Math.random() * colors.length)],
+            color: colors[randNum],
             fontSize: "16px",
             fontWeight: "bold"
             }
           });
-          markers.push(marker)
+          colors.pop(colors[randNum]);
+          markers.push(marker);
         {% endfor %}
       }
 
