@@ -59,6 +59,7 @@
        console.log("ID Token: " + id_token);
       }
       let map;
+      let pos;
       let markers = []
 
       function initMap() {
@@ -66,15 +67,14 @@
           zoom: 15,
           center: {lat: 33.9480, lng: -83.3773}
         });
-        colors = ['green', 'blue', 'red', 'yellow']
+        colors = ['green', 'blue', 'black', 'brown']
         let title;
         {% for course in courses %}
           title = '{{courses[course][0]}}'
-
+          pos = {lat: {{courses[course][1][0]}}, lng: {{courses[course][1][1]}} };
           marker = new google.maps.Marker({
-          position: {lat: {{courses[course][1][0]}}, lng: {{courses[course][1][1]}} },
+          position: pos,
           map: map,
-          draggable: true,
           label: {
             text: title,
             color: colors[Math.floor(Math.random() * colors.length)],
@@ -93,9 +93,22 @@
       }
 
       function deleteMarkers() {
-        clearMarkers();
+        setMapOnAll(null);
         markers = [];
       }
+      console.log(flightPlanCoordinates);
+
+        let flightPath = new google.maps.Polyline({
+          path: flightPlanCoordinates,
+          geodesic: true,
+          strokeColor: '#FF0000',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        flightPath.setMap(map);
+
+
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB17dJU7iK9tgYoQkoRzy-2597DHx4ePMQ&callback=initMap">
