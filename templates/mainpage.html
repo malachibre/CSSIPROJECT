@@ -6,9 +6,20 @@
     <meta name="google-signin-client_id" content="311469694498-hh3fvboihp5ad7ogfqidechkugugic7l.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <link rel="stylesheet" href="static/mainpage.css"/>
+    <!-- <script>
+    window.onload=function(){
+      document.getElementById("button").style.display='none';
+
+    }
+    function showButton(){
+      document.getElementById("button").style.display='block';
+    }
+    </script> -->
     <title></title>
   </head>
   <body>
+  <!-- <input type="button" id="button" value="New Button"/>
+  <input type="text" id="userText" value="Change the text" onchange="showButton()"/> -->
     <h2>Enter your CRN(s):</h2>
     <form method = "post" action = "/redirect">
             <input name = "CRN1" type = "number"
@@ -57,6 +68,9 @@
        // The ID token you need to pass to your backend:
        var id_token = googleUser.getAuthResponse().id_token;
        console.log("ID Token: " + id_token);
+       document.querySelector("#signout").classList.remove("hide");
+       document.querySelector("#login_button").classList.add("hide");
+
       }
       let map;
       let markers = []
@@ -97,15 +111,20 @@
       }
     </script>
 
-    <a  href="#" onclick="signOut();" class= "button">Sign out</a>
+    <a  href="#" id="signout" onclick="signOut();" class= "button hide" >Sign out</a>
     <script>
       function signOut() {
         var auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
           console.log('User signed out.');
+          document.querySelector("#signout").classList.add("hide");
+          document.querySelector("#login_button").classList.remove("hide");
+
+
         });
       }
     </script>
+
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB17dJU7iK9tgYoQkoRzy-2597DHx4ePMQ&callback=initMap">
     </script>
