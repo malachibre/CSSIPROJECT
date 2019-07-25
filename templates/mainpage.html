@@ -10,6 +10,7 @@
     <img id="logo" alt="logo" src="static/logo.png"/>
   </head>
   <body>
+    <div class="form">
     <h2>Enter your CRN(s):</h2>
     <form method = "post" action = "/redirect">
             <input name = "CRN1" type = "number"
@@ -29,7 +30,7 @@
         <!-- <button type="submit">Submit</button><br><br> -->
         <button type="submit" formaction="/redirect">SUBMIT</button><br><br>
       </form>
-
+    </div>
       <h3> Select the day of the week in which you want to see your route!</h3>
       <div class="btn-group">
         <button onclick="removeAllButLet('M');">Monday</button><br>
