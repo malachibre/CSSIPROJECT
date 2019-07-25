@@ -57,6 +57,9 @@
        // The ID token you need to pass to your backend:
        var id_token = googleUser.getAuthResponse().id_token;
        console.log("ID Token: " + id_token);
+       document.querySelector("#signoutbutton").classList.remove("hide");
+       document.querySelector("#login_button").classList.add("hide");
+
       }
       let map;
       let pos;
@@ -117,6 +120,17 @@
         markers = [];
       }
 
+    </script>
+    <a href="#" id="signoutbutton" onclick="signOut()" class= "button hide">Sign out</a>
+    <script>
+      function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+          document.querySelector("#signoutbutton").classList.add("hide");
+          document.querySelector("#login_button").classList.remove("hide");
+        });
+      }
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB17dJU7iK9tgYoQkoRzy-2597DHx4ePMQ&callback=initMap">
