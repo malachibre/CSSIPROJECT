@@ -9,18 +9,25 @@ body {
   width: 800px;
   height: 600px;
   position: absolute;
-  right: 50px;
+  right: 20px;
   top: 200px;
 }
 
 #login_button {
   position: absolute;
-  right: 50px;
-  top: 20px;
+  right: 200px;
+  top: 10px;
 }
 
 #addCRN {
   position: absolute;
-  right: 50px;
-  bottom:   100px;
+  right: 20px;
+  bottom:70px;
+}
+
+#logo {
+  width: 150px;
+  height: 100px;
+  position: relative;
+  left: 5px;
 }
