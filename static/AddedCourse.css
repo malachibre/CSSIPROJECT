@@ -1,3 +1,14 @@
 body {
   background-color: rgb(176,62, 66);
 }
+
+div {
+  position: fixed;
+  top: 37%;
+  left: 35%;
+}
+
+#backButton {
+  position: fixed;
+  left: 46%
+}
