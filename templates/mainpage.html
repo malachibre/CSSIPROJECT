@@ -74,7 +74,7 @@
         colors = ['green', 'blue', 'black', 'brown']
         let title;
         {% for course in courses %}
-          title = '{{courses[course][0]}}'
+          title = '{{courses[course][0]}}' + 'String({{courses[course][2]}})'
           pos = {lat: {{courses[course][1][0]}}, lng: {{courses[course][1][1]}} };
           marker = new google.maps.Marker({
           position: pos,
