@@ -13,4 +13,8 @@ const newInput = () => {
   // <!--- -->
 }
 
+
 button = document.querySelector("#addCRN");
+button.addEventListener("click", () => {
+  setMapOnAll(null);
+});
