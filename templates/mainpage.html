@@ -23,7 +23,7 @@
                   value = "text here"><br>
             <input name = "CRN5" type = "number"
                   value = "text here"><br>
-            <input id="addCRN" type="button" value="DELETE COURSES" onclick="deleteMarkers();"/>
+            <input id="addCRN" type="button" value="DELETE COURSES" onclick="calculateAndDisplayRoute();"/>
        <!-- <button id="textnum" onclick="newInput">Add CRN</button> -->
         <!-- <input type="submit" value="Submit!"> -->
       <!-- <a href="AddedCourse.html">Submit</a><br><br> -->
@@ -41,7 +41,6 @@
       </div>
 
       <div id="map_canvas" style="width: 800px; height:500px;"></div>
-      <div id="map_canvas"></div>
       <div id="login_button" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
       <script>
 
@@ -63,8 +62,11 @@
       let map;
       let pos;
       let markers = []
+      let directionsService;
+      let directionsDisplay;
 
       function initMap() {
+
           map = new google.maps.Map(document.getElementById('map_canvas'), {
           zoom: 15,
           center: {lat: 33.9480, lng: -83.3773}
@@ -84,9 +86,27 @@
             fontWeight: "bold"
             }
           });
+          directionsDisplay.setMap(map);
           markers.push(marker)
         {% endfor %}
       }
+
+      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        directionsService = new google.maps.DirectionsService;
+        directionsDisplay = new google.maps.DirectionsRenderer;
+        directionsService.route({
+          origin: {lat: 33.9534, lng: -83.3734},
+          destination:{lat: 33.9533 ,lng: -83.3750},
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+
 
       function setMapOnAll(map) {
         for (var i = 0; i < markers.length; i++) {
@@ -98,18 +118,6 @@
         setMapOnAll(null);
         markers = [];
       }
-      console.log(flightPlanCoordinates);
-
-        let flightPath = new google.maps.Polyline({
-          path: flightPlanCoordinates,
-          geodesic: true,
-          strokeColor: '#FF0000',
-          strokeOpacity: 1.0,
-          strokeWeight: 2
-        });
-
-        flightPath.setMap(map);
-
 
     </script>
     <script async defer
