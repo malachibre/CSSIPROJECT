@@ -66,7 +66,7 @@
           zoom: 15,
           center: {lat: 33.9480, lng: -83.3773}
         });
-        colors = ['green', 'blue', 'red', 'yellow']
+        colors = ['green', 'blue', 'black', 'brown']
         let title;
         {% for course in courses %}
           title = '{{courses[course][0]}}'
@@ -74,7 +74,6 @@
           marker = new google.maps.Marker({
           position: {lat: {{courses[course][1][0]}}, lng: {{courses[course][1][1]}} },
           map: map,
-          draggable: true,
           label: {
             text: title,
             color: colors[Math.floor(Math.random() * colors.length)],
@@ -93,7 +92,7 @@
       }
 
       function deleteMarkers() {
-        clearMarkers();
+        setMapOnAll(null);
         markers = [];
       }
     </script>
