@@ -18,3 +18,9 @@ body {
   right: 50px;
   top: 20px;
 }
+
+#addCRN {
+  position: absolute;
+  right: 50px;
+  bottom:   100px;
+}
