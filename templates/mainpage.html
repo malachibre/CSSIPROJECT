@@ -21,7 +21,7 @@
                   value = "text here"><br>
             <input name = "CRN5" type = "number"
                   value = "text here"><br>
-            <input id="addCRN" type="button" value="Add CRN" onclick="deleteMarkers();"/>
+            <input id="addCRN" type="button" value="DELETE COURSES" onclick="deleteMarkers();"/>
        <!-- <button id="textnum" onclick="newInput">Add CRN</button> -->
         <!-- <input type="submit" value="Submit!"> -->
       <!-- <a href="AddedCourse.html">Submit</a><br><br> -->
@@ -66,17 +66,18 @@
           zoom: 15,
           center: {lat: 33.9480, lng: -83.3773}
         });
-
-
+        colors = ['green', 'blue', 'red', 'yellow']
+        let title;
         {% for course in courses %}
-          let title = '{{courses[course][0]}}'
+          title = '{{courses[course][0]}}'
 
           marker = new google.maps.Marker({
           position: {lat: {{courses[course][1][0]}}, lng: {{courses[course][1][1]}} },
           map: map,
+          draggable: true,
           label: {
             text: title,
-            color: "blue",
+            color: colors[Math.floor(Math.random() * colors.length)],
             fontSize: "16px",
             fontWeight: "bold"
             }
