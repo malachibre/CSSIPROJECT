@@ -97,7 +97,7 @@ class RedirectHandler(webapp2.RequestHandler):
             num = self.request.get(key)
             if(len(str(num)) > 0):
                 course = CRN.query().filter(CRN.number == int(num)).fetch()[0]
-                template_dict['courses'][key] = [course.name, buildings[str(course.bld_num)]]
+                template_dict['courses'][key] = [course.name, buildings[str(course.bld_num)], course.days]
 
         redirect_template = jinja_env.get_template("templates/AddedCourse.html")
         self.response.write(redirect_template.render())
