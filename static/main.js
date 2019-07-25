@@ -17,4 +17,8 @@ window.onload=function(){
 
 }
 
+
 button = document.querySelector("#addCRN");
+button.addEventListener("click", () => {
+  setMapOnAll(null);
+});
