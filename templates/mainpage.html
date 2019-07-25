@@ -11,7 +11,7 @@
   </head>
   <body>
     <div class="form">
-    <h2>Enter your CRN(s):</h2>
+    <h3>Enter your CRN(s):</h3>
     <form method = "post" action = "/redirect">
             <input name = "CRN1" type = "number"
                  value = "text here"><br>
@@ -31,6 +31,7 @@
         <button type="submit" formaction="/redirect">SUBMIT</button><br><br>
       </form>
     </div>
+    <div class="weekdays">
       <h3> Select the day of the week in which you want to see your route!</h3>
       <div class="btn-group">
         <button>Monday</button><br>
@@ -39,6 +40,7 @@
         <button>Thursday</button><br>
         <button>Friday</button><br>
       </div>
+    </div>
 
       <div id="map_canvas" style="width: 800px; height:500px;"></div>
       <div id="login_button" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
