@@ -69,9 +69,17 @@
 
 
         {% for course in courses %}
+          let title = '{{courses[course][0]}}'
+
           marker = new google.maps.Marker({
           position: {lat: {{courses[course][1][0]}}, lng: {{courses[course][1][1]}} },
           map: map,
+          label: {
+            text: title,
+            color: "blue",
+            fontSize: "16px",
+            fontWeight: "bold"
+            }
           });
           markers.push(marker)
         {% endfor %}
