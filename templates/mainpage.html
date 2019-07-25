@@ -21,12 +21,12 @@
                   value = "text here"><br>
             <input name = "CRN5" type = "number"
                   value = "text here"><br>
-            <input id="addCRN" type="button" value="Add CRN"/>
+            <input id="addCRN" type="button" value="Add CRN" onclick="deleteMarkers();"/>
        <!-- <button id="textnum" onclick="newInput">Add CRN</button> -->
         <!-- <input type="submit" value="Submit!"> -->
       <!-- <a href="AddedCourse.html">Submit</a><br><br> -->
         <!-- <button type="submit">Submit</button><br><br> -->
-        <button type="submit" formaction="/redirect">Submit</button><br><br>
+        <button type="submit" formaction="/redirect">SUBMIT</button><br><br>
       </form>
 
       <h3> Select the day of the week in which you want to see your route!</h3>
@@ -57,22 +57,33 @@
        var id_token = googleUser.getAuthResponse().id_token;
        console.log("ID Token: " + id_token);
       }
-
+      let map;
+      let markers = []
       function initMap() {
-        var map = new google.maps.Map(document.getElementById('map_canvas'), {
+          map = new google.maps.Map(document.getElementById('map_canvas'), {
           zoom: 15,
           center: {lat: 33.9480, lng: -83.3773}
         });
 
-        {% for loc in locs %}
-          var marker = new google.maps.Marker({
-            position: {lat: {{locs[loc][0]}}, lng: {{locs[loc][1]}}},
-            map: map,
-            title: 'Hello World!'
-          });
-          markers.push(marker);
-        {% endfor %}
 
+        {% for course in courses %}
+          marker = new google.maps.Marker({
+          position: {lat: {{courses[course][1][0]}}, lng: {{courses[course][1][1]}} },
+          map: map,
+          });
+          markers.push(marker)
+        {% endfor %}
+      }
+
+      function setMapOnAll(map) {
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(map);
+        }
+      }
+
+      function deleteMarkers() {
+        clearMarkers();
+        markers = [];
       }
     </script>
     <script async defer
