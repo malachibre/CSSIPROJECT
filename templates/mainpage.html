@@ -34,11 +34,11 @@
     <div class="weekdays">
       <h3> Select the day of the week in which you want to see your route!</h3>
       <div class="btn-group">
-        <button>Monday</button><br>
-        <button>Tuesday</button><br>
-        <button>Wednesday</button><br>
-        <button>Thursday</button><br>
-        <button>Friday</button><br>
+        <button onclick="removeAllButLet('M');">Monday</button><br>
+        <button onclick="removeAllButLet('T');">Tuesday</button><br>
+        <button onclick="removeAllButLet('W');">Wednesday</button><br>
+        <button onclick="removeAllButLet('T');">Thursday</button><br>
+        <button onclick="removeAllButLet('F');">Friday</button><br>
       </div>
     </div>
 
@@ -122,6 +122,19 @@
         setMapOnAll(null);
         markers = [];
       }
+
+      function removeAllButLet(let){
+        setMapOnAll(map);
+        for(let i = 0; i < markers.length; i++){
+          title = markers[i]['label']['text']
+          if(title.indexOf(let, title.indexOf(':')) == -1){
+            markers[i].setMap(null);
+          }
+        }
+      }
+
+
+
 
     </script>
     <script async defer
