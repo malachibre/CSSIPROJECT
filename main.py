@@ -79,7 +79,7 @@ buildings = {
 }
 
 template_dict = {
-    'locs': {}
+    'courses': {}
 }
 
 class MainHandler(webapp2.RequestHandler):
@@ -89,13 +89,13 @@ class MainHandler(webapp2.RequestHandler):
 
 class RedirectHandler(webapp2.RequestHandler):
     def post(self):
-        num = self.request.get("CRN1")
-        courses = {}
         for i in range(1,6):
             key = "CRN" + str(i)
-            if(len(str(self.request.get(key))) > 0):
-                template_dict['locs'][key] = \
-                    buildings[str(CRN.query().filter(CRN.number == int(self.request.get(key))).fetch()[0].bld_num)]
+            num = self.request.get(key)
+            if(len(str(num)) > 0):
+                course = CRN.query().filter(CRN.number == int(num)).fetch()[0]
+                template_dict['courses'][key] = [course.name, buildings[str(course.bld_num)]]
+
         redirect_template = jinja_env.get_template("templates/AddedCourse.html")
         self.response.write(redirect_template.render())
 
