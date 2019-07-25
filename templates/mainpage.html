@@ -96,6 +96,16 @@
         markers = [];
       }
     </script>
+
+    <a  href="#" onclick="signOut();" class= "button">Sign out</a>
+    <script>
+      function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+        });
+      }
+    </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB17dJU7iK9tgYoQkoRzy-2597DHx4ePMQ&callback=initMap">
     </script>
