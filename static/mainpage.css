@@ -34,3 +34,24 @@ body {
   width: 198.991px;
   height: 87.9972;
 }
+
+
+.button {
+  background-color: #1c87c9;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  position: absolute;
+  right: 50px;
+  top: 20px;
+  display: inline;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+  width: 100px;
+}
+
+.button.hide, .g-signin2.hide{
+  display:none;
+}
