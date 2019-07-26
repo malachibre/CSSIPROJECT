@@ -115,7 +115,8 @@
           if(markers.length > 2){
             for(let i = 1; i < markers.length - 2; i++){
               wps.push({
-                location: {lat: markers[i].getPosition.lat(), lng: markers[i].getPosition.lng()}
+                location: {lat: markers[i].getPosition.lat(), lng: markers[i].getPosition.lng()},
+                stopover: true
               });
             }
           }
