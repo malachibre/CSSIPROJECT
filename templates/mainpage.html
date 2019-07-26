@@ -67,7 +67,9 @@
       }
       let map;
       let pos;
-      let markers = []
+      let markers = [];
+      let colors;
+      let wps = [];
       let randNum;
       let title;
       let directionsService;
@@ -82,7 +84,7 @@
           zoom: 15,
           center: {lat: 33.9480, lng: -83.3773}
         });
-        colors = ['green', 'blue', 'black', 'brown', 'yellow']
+        colors = ['green', 'blue', 'black', 'brown', 'yellow'];
 
         {% for course in selected_courseList %}
           randNum = Math.floor(Math.random() * colors.length);
@@ -106,18 +108,17 @@
         {% endfor %}
         directionsDisplay.setMap(map);
         if(markers.length > 1){
-          let wps = [];
           if(markers.length > 2){
-            for(let i = 1; i < markers.length - 2; i++){
+            for(let i = 1; i < markers.length - 1; i++){
               wps.push({
-                location: {lat: markers[i].getPosition.lat(), lng: markers[i].getPosition.lng()},
+                location: {lat: markers[i].getPosition().lat(), lng: markers[i].getPosition().lng()},
                 stopover: true
               });
             }
           }
           directionsService.route({
             origin: {lat: markers[0].getPosition().lat(), lng: markers[0].getPosition().lng()},
-            destination: {lat: markers[markers.length - 1].getPosition().lat(), lng: markers[markers.length - 1].getPosition().lng()},
+            destination: {lat: markers[marker.length - 1].getPosition().lat(), lng: markers[marker.length - 1].getPosition().lng()},
             waypoints: wps,
             travelMode: 'WALKING'
           }, function(response, status) {
@@ -128,13 +129,11 @@
             }
           });
         }
-
-
       }
 
 
       function setMapOnAll(map) {
-        for (var i = 0; i < markers.length; i++) {
+        for (let i = 0; i < markers.length; i++) {
           markers[i].setMap(map);
         }
       }
