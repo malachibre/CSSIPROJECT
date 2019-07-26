@@ -3,6 +3,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: left;
+  font-family: 'Acme', sans-serif;
+
 }
 
 #map_canvas {
@@ -21,6 +23,8 @@ body {
   position: absolute;
   right: 20px;
   bottom:80px;
+  font-family: 'Oswald', sans-serif;
+  text-c
 }
 
 #logo {
@@ -48,6 +52,8 @@ body {
   margin: 4px 2px;
   cursor: pointer;
   width: 75px;
+  font-family: 'Oswald', sans-serif;
+
 }
 
 .button.hide, .g-signin2.hide{
@@ -68,6 +74,7 @@ body {
   top: 134px;
   left: 240px;
   padding: 10px;
+  font-family: 'Oswald', sans-serif;
 }
 
 .btn-group {
@@ -77,16 +84,25 @@ body {
 h2 {
   position: fixed;
   top: 0px;
-  left: 580px;
+  left: 550px;
+  font-family: 'Baloo', cursive;
+  font-size: 40px;
+  color: white;
 }
 
 #Confirmation {
   position: fixed;
   top: 37%;
   left: 35%;
+  font-family: 'Oswald', sans-serif;
+
 }
 
 #backButton {
   position: fixed;
   left: 46%
+}
+
+.Letters {
+  color: dimgrey;
 }
