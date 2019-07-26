@@ -24,7 +24,7 @@ body {
 #addCRN {
   position: absolute;
   right: 20px;
-  bottom:110px;
+  bottom:170px;
   background: white;
 }
 
@@ -73,7 +73,7 @@ body {
   width: 400px;
   position: fixed;
   top: 137px;
-  left: 240px;
+  left: 250px;
   padding: 10px;
   font-family: 'Acme', sans-serif
   ;
@@ -87,7 +87,7 @@ body {
 h2 {
   position: fixed;
   top: 0px;
-  left: 550px;
+  left: 608px;
   font-family: 'Baloo', cursive;
   font-size: 40px;
   color: white;
