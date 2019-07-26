@@ -22,8 +22,6 @@
       {% for course in all_courses %}
         <input type="checkbox" name="CRN{{course.number}}" value="CRN{{course.number}}">{{course.number}} {{course.name}}<br>
       {% endfor %}
-
-
         <div class="submit">
           <button type="submit" formaction="/redirect">SUBMIT</button><br><br>
         </div>
@@ -87,12 +85,13 @@
         colors = ['green', 'blue', 'black', 'brown', 'yellow'];
 
         {% for course in selected_courseList %}
+        console.log({{course.title}});
           randNum = Math.floor(Math.random() * colors.length);
           title = '{{course.name}}';
           {% for day in course.days %}
             title += '{{day}}'.toUpperCase();
           {% endfor %}
-          pos = {lat: {{course.bld_num[0]}}, lng: {{course.bld_num[1]}} };
+          pos = {lat: {{bld_locs[course.bld_num][0]}}, lng: {{bld_locs[course.bld_num][1]}} };
           marker = new google.maps.Marker({
           position: pos,
           map: map,
