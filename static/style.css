@@ -6,23 +6,21 @@ body {
 }
 
 #map_canvas {
-  width: 800px;
-  height: 600px;
   position: absolute;
   right: 20px;
-  top: 200px;
+  top: 134px;
 }
 
 #login_button {
   position: absolute;
-  right: 200px;
-  top: 10px;
+  right: 100px;
+  top: 20px;
 }
 
 #addCRN {
   position: absolute;
   right: 20px;
-  bottom:120px;
+  bottom:80px;
 }
 
 #logo {
@@ -43,13 +41,13 @@ body {
   text-align: center;
   text-decoration: none;
   position: absolute;
-  right: 50px;
+  right: 100px;
   top: 20px;
   display: inline;
   font-size: 20px;
   margin: 4px 2px;
   cursor: pointer;
-  width: 100px;
+  width: 75px;
 }
 
 .button.hide, .g-signin2.hide{
@@ -58,14 +56,18 @@ body {
 }
 
 .form {
-
+  border: 5px solid;
+  padding: 10px;
+  width: 150px;
 }
 
 .weekdays {
   border: 5px solid;
   width: 400px;
   position: fixed;
-  bottom: 200px;
+  top: 134px;
+  left: 240px;
+  padding: 10px;
 }
 
 .btn-group {
@@ -75,7 +77,7 @@ body {
 h2 {
   position: fixed;
   top: 0px;
-  left: 600px;
+  left: 580px;
 }
 
 #Confirmation {
