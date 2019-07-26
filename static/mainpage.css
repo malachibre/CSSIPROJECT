@@ -1,0 +1,79 @@
+body {
+  background-color: rgb(176,62, 66);
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+#map_canvas {
+  width: 800px;
+  height: 600px;
+  position: absolute;
+  right: 20px;
+  top: 200px;
+}
+
+#login_button {
+  position: absolute;
+  right: 200px;
+  top: 10px;
+}
+
+#addCRN {
+  position: absolute;
+  right: 20px;
+  bottom:120px;
+}
+
+#logo {
+  /* width: 160px;
+  height: 100px;
+  position: relative;
+  left: 5px; */
+  display: inline;
+  width: 198.991px;
+  height: 87.9972;
+}
+
+
+.button {
+  background-color: #1c87c9;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  position: absolute;
+  right: 50px;
+  top: 20px;
+  display: inline;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+  width: 100px;
+}
+
+.button.hide, .g-signin2.hide{
+  display:none;
+
+}
+
+.form {
+
+}
+
+.weekdays {
+  border: 5px solid;
+  width: 400px;
+  position: fixed;
+  bottom: 200px;
+}
+
+.btn-group {
+  text-align: center;
+}
+
+h2 {
+  position: fixed;
+  top: 0px;
+  left: 600px;
+}
