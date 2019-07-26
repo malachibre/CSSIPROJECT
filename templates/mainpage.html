@@ -17,7 +17,7 @@
     </div>
 
     <div class="form">
-    <h3>Enter your CRN(s):</h3>
+    <h3><span class="directions">Enter your CRN(s):</span></h3>
     <form method = "post" action = "/redirect">
             <input name = "CRN1" type = "number"
                  placeholder="12345"><br>
@@ -29,12 +29,14 @@
                   placeholder="12345"><br>
             <input name = "CRN5" type = "number"
                   placeholder="12345"><br>
-            <input id="addCRN" type="button" value="DELETE COURSES" onclick="deleteMarkers();;"/>
+            <input id="addCRN" type="button" value="DELETE COURSES" onclick="deleteMarkers();;"/><br>
        <!-- <button id="textnum" onclick="newInput">Add CRN</button> -->
         <!-- <input type="submit" value="Submit!"> -->
       <!-- <a href="AddedCourse.html">Submit</a><br><br> -->
         <!-- <button type="submit">Submit</button><br><br> -->
-        <button type="submit" formaction="/redirect">SUBMIT</button><br><br>
+        <div class="submit">
+          <button type="submit" formaction="/redirect">SUBMIT</button><br><br>
+        </div>
       </form>
     </div>
     <div class="weekdays">
@@ -48,7 +50,7 @@
       </div>
     </div>
 
-      <div id="map_canvas" style="width: 800px; height:500px;"></div>
+      <div id="map_canvas" style="width: 800px; height:600px;"></div>
       <div id="login_button" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
       <script>
 

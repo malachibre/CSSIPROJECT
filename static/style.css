@@ -23,15 +23,9 @@ body {
   position: absolute;
   right: 20px;
   bottom:80px;
-  font-family: 'Oswald', sans-serif;
-  text-c
 }
 
 #logo {
-  /* width: 160px;
-  height: 100px;
-  position: relative;
-  left: 5px; */
   display: inline;
   width: 198.991px;
   height: 87.9972;
@@ -63,22 +57,26 @@ body {
 
 .form {
   border: 5px solid;
-  padding: 10px;
+  padding: 4.5px;
   width: 150px;
+  text-align: center;
 }
 
 .weekdays {
   border: 5px solid;
   width: 400px;
   position: fixed;
-  top: 134px;
+  top: 137px;
   left: 240px;
   padding: 10px;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Acme', sans-serif
+  ;
 }
 
 .btn-group {
   text-align: center;
+  font-family: 'Oswald', sans-serif;
+
 }
 
 h2 {
@@ -105,4 +103,12 @@ h2 {
 
 .Letters {
   color: dimgrey;
+}
+
+.submit {
+  text-align: center;
+}
+
+.directions {
+  text-align: left;
 }
