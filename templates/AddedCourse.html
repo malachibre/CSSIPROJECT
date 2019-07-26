@@ -2,6 +2,8 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Acme|Fjalla+One|Literata|Open+Sans|Oswald|Rubik+Mono+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Baloo" rel="stylesheet">
     <link rel="stylesheet" href="static/style.css"/>
     <title></title>
     <img id="logo" alt="logo" src="static/logo.png"/>
@@ -11,7 +13,16 @@
     <div id="Confirmation">
     <h1> Your Courses Have Been Added!</h1>
 
-    <form id=backButton action="/">
+    {% for course in selected_courseList %}
+      <ul>
+        <li>{{course.number}} {{course.name}}</li>
+      </ul>
+    {% endfor %}
+
+
+
+
+     <form id=backButton action="/">
         <button>See My Route(s)</button>
     </form>
     <div>
