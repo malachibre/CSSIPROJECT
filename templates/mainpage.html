@@ -27,7 +27,7 @@
                   placeholder="12345"><br>
             <input name = "CRN5" type = "number"
                   placeholder="12345"><br>
-            <input id="addCRN" type="button" value="DELETE COURSES" onclick="deleteMarkers();"/>
+            <input id="addCRN" type="button" value="DELETE COURSES" onclick="displayRoute();"/>
        <!-- <button id="textnum" onclick="newInput">Add CRN</button> -->
         <!-- <input type="submit" value="Submit!"> -->
       <!-- <a href="AddedCourse.html">Submit</a><br><br> -->
@@ -78,6 +78,9 @@
 
       function initMap() {
 
+        directionsService = new google.maps.DirectionsService;
+        directionsDisplay = new google.maps.DirectionsRenderer;
+
           map = new google.maps.Map(document.getElementById('map_canvas'), {
           zoom: 15,
           center: {lat: 33.9480, lng: -83.3773}
@@ -104,15 +107,11 @@
           colors.pop(colors[randNum]);
           markers.push(marker);
         {% endfor %}
-      }
-
-      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        directionsService = new google.maps.DirectionsService;
-        directionsDisplay = new google.maps.DirectionsRenderer;
+        directionsDisplay.setMap(map);
         directionsService.route({
-          origin: {lat: 33.9534, lng: -83.3734},
-          destination:{lat: 33.9533 ,lng: -83.3750},
-          travelMode: 'DRIVING'
+          origin: orig,
+          destination: dest,
+          travelMode: 'WALKING'
         }, function(response, status) {
           if (status === 'OK') {
             directionsDisplay.setDirections(response);
@@ -120,7 +119,17 @@
             window.alert('Directions request failed due to ' + status);
           }
         });
+
       }
+
+      function displayRoute(directionsService, directionsDisplay, orig, dest) {
+
+
+      }
+
+
+
+
 
       function setMapOnAll(map) {
         for (var i = 0; i < markers.length; i++) {
