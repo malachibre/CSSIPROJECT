@@ -19,17 +19,10 @@
     <div class="form">
     <h3><span class="directions">Enter your CRN(s):</span></h3>
     <form method = "post" action = "/redirect" id= "my-form">
-            <input name = "CRN1" type = "number" class = "school1"
-                 placeholder="12345"><br>
-            <input name = "CRN2" type = "number" class = "school1"
-                 placeholder="12345"><br>
-            <input name = "CRN3" type = "number" class = "school1"
-                 placeholder="12345"><br>
-            <input name = "CRN4" type = "number" class = "school1"
-                  placeholder="12345"><br>
-            <input name = "CRN5" type = "number" class = "school1"
-                  placeholder="12345"><br>
-            <input id="addCRN" type="button" value="DELETE COURSES" onclick="deleteMarkers();"/>
+      {% for course in all_courses %}
+        <input type="checkbox" name="CRN{{course.number}}" value="CRN{{course.number}}">{{course.number}} {{course.name}}<br>
+      {% endfor %}
+
 
         <div class="submit">
           <button type="submit" formaction="/redirect">SUBMIT</button><br><br>
@@ -91,13 +84,13 @@
         });
         colors = ['green', 'blue', 'black', 'brown', 'yellow']
 
-        {% for course in courses %}
+        {% for course in selected_courseList %}
           randNum = Math.floor(Math.random() * colors.length);
-          title = '{{courses[course][0]}}: ';
-          {% for day in courses[course][2] %}
+          title = '{{course.name}}';
+          {% for day in course.days %}
             title += '{{day}}'.toUpperCase();
           {% endfor %}
-          pos = {lat: {{courses[course][1][0]}}, lng: {{courses[course][1][1]}} };
+          pos = {lat: {{course.bld_num[0]}}, lng: {{course.bld_num[1]}} };
           marker = new google.maps.Marker({
           position: pos,
           map: map,
