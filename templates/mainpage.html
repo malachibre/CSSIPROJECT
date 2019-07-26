@@ -77,6 +77,9 @@
 
         directionsService = new google.maps.DirectionsService;
         directionsDisplay = new google.maps.DirectionsRenderer;
+        directionsService2 = new google.maps.DirectionsService;
+        directionsDisplay2 = new google.maps.DirectionsRenderer;
+
 
           map = new google.maps.Map(document.getElementById('map_canvas'), {
           zoom: 15,
@@ -110,14 +113,14 @@
           if(markers.length > 2){
             for(let i = 1; i < markers.length - 1; i++){
               wps.push({
-                location: {lat: markers[i].getPosition().lat(), lng: markers[i].getPosition().lng()},
+                location: markers[i].position,
                 stopover: true
               });
             }
           }
           directionsService.route({
             origin: {lat: markers[0].getPosition().lat(), lng: markers[0].getPosition().lng()},
-            destination: {lat: markers[marker.length - 1].getPosition().lat(), lng: markers[marker.length - 1].getPosition().lng()},
+            destination: {lat: markers[markers.length - 1].getPosition().lat(), lng: markers[markers.length - 1].getPosition().lng()},
             waypoints: wps,
             travelMode: 'WALKING'
           }, function(response, status) {
@@ -128,6 +131,9 @@
             }
           });
         }
+
+
+
       }
 
 
