@@ -53,6 +53,11 @@ C10065.put()
 C10098 = CRN(number = 10098, name="BIOL1103", bld_num = 1035, days = ['m', 'w', 'f'])
 C10098.put()
 
+crnEntries = CRN.query()
+crnNumbers = []
+for crnEntry in crnEntries:
+    crnNumbers.append(crnEntry.number)
+
 
 jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -97,7 +102,9 @@ class RedirectHandler(webapp2.RequestHandler):
             num = self.request.get(key)
             if(len(str(num)) > 0):
                 course = CRN.query().filter(CRN.number == int(num)).fetch()[0]
-                template_dict['courses'][key] = [course.name, buildings[str(course.bld_num)], course.days]
+                template_dict['courses'][key] = [course.name, buildings[str(course.bld_num)], course.days, course.number]
+        for course in template_dict['courses']:
+            self.response.write(template_dict['courses'][course][3])
 
         redirect_template = jinja_env.get_template("templates/AddedCourse.html")
         self.response.write(redirect_template.render())

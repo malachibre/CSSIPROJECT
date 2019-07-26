@@ -18,26 +18,26 @@
 
     <div class="form">
     <h3><span class="directions">Enter your CRN(s):</span></h3>
-    <form method = "post" action = "/redirect">
-            <input name = "CRN1" type = "number"
+    <form method = "post" action = "/redirect" id= "my-form">
+            <input name = "CRN1" type = "number" class = "school1"
                  placeholder="12345"><br>
-            <input name = "CRN2" type = "number"
+            <input name = "CRN2" type = "number" class = "school1"
                  placeholder="12345"><br>
-            <input name = "CRN3" type = "number"
+            <input name = "CRN3" type = "number" class = "school1"
                  placeholder="12345"><br>
-            <input name = "CRN4" type = "number"
+            <input name = "CRN4" type = "number" class = "school1"
                   placeholder="12345"><br>
-            <input name = "CRN5" type = "number"
+            <input name = "CRN5" type = "number" class = "school1"
                   placeholder="12345"><br>
-            <input id="addCRN" type="button" value="DELETE COURSES" onclick="deleteMarkers();;"/><br>
-       <!-- <button id="textnum" onclick="newInput">Add CRN</button> -->
-        <!-- <input type="submit" value="Submit!"> -->
-      <!-- <a href="AddedCourse.html">Submit</a><br><br> -->
-        <!-- <button type="submit">Submit</button><br><br> -->
+            <input id="addCRN" type="button" value="DELETE COURSES" onclick="deleteMarkers();"/>
+
         <div class="submit">
           <button type="submit" formaction="/redirect">SUBMIT</button><br><br>
         </div>
       </form>
+    </script>
+
+
     </div>
     <div class="weekdays">
       <h3> Select the day of the week in which you want to see your route!</h3>
@@ -50,7 +50,7 @@
       </div>
     </div>
 
-      <div id="map_canvas" style="width: 800px; height:600px;"></div>
+      <div id="map_canvas" style="width: 800px; height:600px; border-radius: 5px;"></div>
       <div id="login_button" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
       <script>
 
@@ -173,6 +173,7 @@
         });
       }
     </script>
+
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDm2OuZ5noSJfmT6rPUr_vcrYfBZ9wA8B4&callback=initMap">
     </script>
