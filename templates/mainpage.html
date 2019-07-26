@@ -132,18 +132,6 @@
           });
         }
 
-        directionsDisplay2.setMap(map);
-        directionsService2.route({
-          origin: 'Hoboken NJ',
-          destination: 'Carroll Gardens, Brooklyn',
-          travelMode: 'WALKING'
-        }, function(response, status) {
-          if (status === 'OK') {
-            directionsDisplay.setDirections(response);
-          } else {
-            window.alert('Directions request failed due to ' + status);
-          }
-        });
 
 
       }
