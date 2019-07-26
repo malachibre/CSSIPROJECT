@@ -16,24 +16,25 @@
 
     <div class="form">
     <h3>Enter your CRN(s):</h3>
-    <form method = "post" action = "/redirect">
-            <input name = "CRN1" type = "number"
+    <form method = "post" action = "/redirect" id= "my-form">
+            <input name = "CRN1" type = "number" class = "school1"
                  placeholder="12345"><br>
-            <input name = "CRN2" type = "number"
+            <input name = "CRN2" type = "number" class = "school1"
                  placeholder="12345"><br>
-            <input name = "CRN3" type = "number"
+            <input name = "CRN3" type = "number" class = "school1"
                  placeholder="12345"><br>
-            <input name = "CRN4" type = "number"
+            <input name = "CRN4" type = "number" class = "school1"
                   placeholder="12345"><br>
-            <input name = "CRN5" type = "number"
+            <input name = "CRN5" type = "number" class = "school1"
                   placeholder="12345"><br>
             <input id="addCRN" type="button" value="DELETE COURSES" onclick="deleteMarkers();"/>
-       <!-- <button id="textnum" onclick="newInput">Add CRN</button> -->
-        <!-- <input type="submit" value="Submit!"> -->
-      <!-- <a href="AddedCourse.html">Submit</a><br><br> -->
-        <!-- <button type="submit">Submit</button><br><br> -->
+
         <button type="submit" formaction="/redirect">SUBMIT</button><br><br>
+
       </form>
+    </script>
+
+
     </div>
     <div class="weekdays">
       <h3> Select the day of the week in which you want to see your route!</h3>
@@ -155,6 +156,7 @@
         });
       }
     </script>
+
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDm2OuZ5noSJfmT6rPUr_vcrYfBZ9wA8B4&callback=initMap">
     </script>
