@@ -28,8 +28,8 @@
             <input name = "CRN4" type = "number"
                   placeholder="12345"><br>
             <input name = "CRN5" type = "number"
-                  placeholder="12345"><br><br>
-            <input id="addCRN" type="button" value="DELETE COURSES" onclick="deleteMarkers();"/>
+                  placeholder="12345"><br>
+            <input id="addCRN" type="button" value="DELETE COURSES" onclick="deleteMarkers();;"/>
        <!-- <button id="textnum" onclick="newInput">Add CRN</button> -->
         <!-- <input type="submit" value="Submit!"> -->
       <!-- <a href="AddedCourse.html">Submit</a><br><br> -->
@@ -48,7 +48,7 @@
       </div>
     </div>
 
-      <div id="map_canvas" style="width: 800px; height:600px;"></div>
+      <div id="map_canvas" style="width: 800px; height:500px;"></div>
       <div id="login_button" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
       <script>
 
@@ -80,6 +80,9 @@
 
       function initMap() {
 
+        directionsService = new google.maps.DirectionsService;
+        directionsDisplay = new google.maps.DirectionsRenderer;
+
           map = new google.maps.Map(document.getElementById('map_canvas'), {
           zoom: 15,
           center: {lat: 33.9480, lng: -83.3773}
@@ -88,7 +91,7 @@
 
         {% for course in courses %}
           randNum = Math.floor(Math.random() * colors.length);
-          title = '{{courses[course][0]}}: '
+          title = '{{courses[course][0]}}: ';
           {% for day in courses[course][2] %}
             title += '{{day}}'.toUpperCase();
           {% endfor %}
@@ -106,23 +109,33 @@
           colors.pop(colors[randNum]);
           markers.push(marker);
         {% endfor %}
+        directionsDisplay.setMap(map);
+        if(markers.length > 1){
+          let wps = [];
+          if(markers.length > 2){
+            for(let i = 1; i < markers.length - 2; i++){
+              wps.push({
+                location: {lat: markers[i].getPosition.lat(), lng: markers[i].getPosition.lng()}
+              });
+            }
+          }
+          directionsService.route({
+            origin: {lat: markers[0].getPosition().lat(), lng: markers[0].getPosition().lng()},
+            destination: {lat: markers[markers.length - 1].getPosition().lat(), lng: markers[markers.length - 1].getPosition().lng()},
+            waypoints: wps,
+            travelMode: 'WALKING'
+          }, function(response, status) {
+            if (status === 'OK') {
+              directionsDisplay.setDirections(response);
+            } else {
+              window.alert('Directions request failed due to ' + status);
+            }
+          });
+        }
+
+
       }
 
-      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        directionsService = new google.maps.DirectionsService;
-        directionsDisplay = new google.maps.DirectionsRenderer;
-        directionsService.route({
-          origin: {lat: 33.9534, lng: -83.3734},
-          destination:{lat: 33.9533 ,lng: -83.3750},
-          travelMode: 'DRIVING'
-        }, function(response, status) {
-          if (status === 'OK') {
-            directionsDisplay.setDirections(response);
-          } else {
-            window.alert('Directions request failed due to ' + status);
-          }
-        });
-      }
 
       function setMapOnAll(map) {
         for (var i = 0; i < markers.length; i++) {
@@ -132,6 +145,7 @@
 
       function deleteMarkers() {
         setMapOnAll(null);
+        directionsDisplay.setMap(null);
         markers = [];
       }
 
