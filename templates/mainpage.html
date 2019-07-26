@@ -27,7 +27,7 @@
                   placeholder="12345"><br>
             <input name = "CRN5" type = "number"
                   placeholder="12345"><br>
-            <input id="addCRN" type="button" value="DELETE COURSES" onclick="displayRoute();"/>
+            <input id="addCRN" type="button" value="DELETE COURSES" onclick="deleteMarkers();;"/>
        <!-- <button id="textnum" onclick="newInput">Add CRN</button> -->
         <!-- <input type="submit" value="Submit!"> -->
       <!-- <a href="AddedCourse.html">Submit</a><br><br> -->
@@ -89,7 +89,7 @@
 
         {% for course in courses %}
           randNum = Math.floor(Math.random() * colors.length);
-          title = '{{courses[course][0]}}: '
+          title = '{{courses[course][0]}}: ';
           {% for day in courses[course][2] %}
             title += '{{day}}'.toUpperCase();
           {% endfor %}
@@ -108,27 +108,31 @@
           markers.push(marker);
         {% endfor %}
         directionsDisplay.setMap(map);
-        directionsService.route({
-          origin: orig,
-          destination: dest,
-          travelMode: 'WALKING'
-        }, function(response, status) {
-          if (status === 'OK') {
-            directionsDisplay.setDirections(response);
-          } else {
-            window.alert('Directions request failed due to ' + status);
+        if(markers.length > 1){
+          let wps = [];
+          if(markers.length > 2){
+            for(let i = 1; i < markers.length - 2; i++){
+              wps.push({
+                location: {lat: markers[i].getPosition.lat(), lng: markers[i].getPosition.lng()}
+              });
+            }
           }
-        });
+          directionsService.route({
+            origin: {lat: markers[0].getPosition().lat(), lng: markers[0].getPosition().lng()},
+            destination: {lat: markers[markers.length - 1].getPosition().lat(), lng: markers[markers.length - 1].getPosition().lng()},
+            waypoints: wps,
+            travelMode: 'WALKING'
+          }, function(response, status) {
+            if (status === 'OK') {
+              directionsDisplay.setDirections(response);
+            } else {
+              window.alert('Directions request failed due to ' + status);
+            }
+          });
+        }
+
 
       }
-
-      function displayRoute(directionsService, directionsDisplay, orig, dest) {
-
-
-      }
-
-
-
 
 
       function setMapOnAll(map) {
@@ -139,6 +143,7 @@
 
       function deleteMarkers() {
         setMapOnAll(null);
+        directionsDisplay.setMap(null);
         markers = [];
       }
 
