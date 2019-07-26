@@ -112,6 +112,7 @@
           markers.push(marker);
         {% endfor %}
         directionsDisplay.setMap(map);
+        directionsDisplay2.setMap(map);
         if(markers.length > 1){
           if(markers.length > 2){
             for(let i = 1; i < markers.length - 1; i++){
@@ -136,6 +137,8 @@
         }
 
       }
+
+
 
 
       function setMapOnAll(map) {
