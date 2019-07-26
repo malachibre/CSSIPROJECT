@@ -12,10 +12,10 @@ const newInput = () => {
   // // document.body.appendChild(button2);
   // <!--- -->
 }
-window.onload=function(){
-  document.getElementById("button").style.display='none';
-
-}
+// window.onload=function(){
+//   document.getElementById("button").style.display='none';
+//
+// }
 
 
 button = document.querySelector("#addCRN");
