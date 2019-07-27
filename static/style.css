@@ -71,6 +71,9 @@ body {
 }
 
 .weekdays {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border: 5px solid;
   border-radius: 8px;
   width: 400px;
@@ -80,6 +83,18 @@ body {
   padding: 10px;
   font-family: 'Acme', sans-serif
   ;
+}
+
+.schedule{
+  margin-top: 20px;
+  width: 80%;
+  height: 400px;
+  border: 5px solid black;
+}
+
+.selected_agenda{
+  background-color: green;
+  opacity: .5;
 }
 
 .btn-group {

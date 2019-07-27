@@ -39,6 +39,27 @@
         <button onclick="removeAllButLet('T');">Thursday</button><br>
         <button onclick="removeAllButLet('F');">Friday</button><br>
       </div>
+      <div class = "schedule">
+        <center>
+          <div style="width: 100%; height: 5%; font-size: 30px;"> schedule </div>
+          <div id = "mwf-agenda">
+          <p> MON-WED-FRI </p>
+          {% for course in selected_courseList %}
+            {%if 'm' in course.days%}
+              <p>{{course.name}} {{course.time}}</p>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div id = 'tr-agenda'>
+          <p> TUE-THR </p>
+          {% for course in selected_courseList %}
+            {%if 't' in course.days%}
+              <p>{{course.name}} {{course.time}}</p>
+            {% endif %}
+          {% endfor %}
+        </div>
+         </center>
+      </div>
     </div>
 
     <input id="addCRN" type="button" value="DELETE COURSES" onclick="deleteMarkers();"/>
@@ -111,7 +132,7 @@
             }
           });
           colors.pop(colors[randNum]);
-          if(title.indexOf('M', title.indexOf(':')) > -1)
+          if(title.indexOf('W', title.indexOf(':')) > -1)
             markersMWF.push(marker);
           else
             markersTR.push(marker);
@@ -174,6 +195,10 @@
       }
 
       function removeAllButLet(let){
+        if(document.querySelector("#mwf-agenda").classList.contains("selected_agenda"))
+          document.querySelector("#mwf-agenda").classList.remove("selected_agenda");
+        if(document.querySelector("#tr-agenda").classList.contains("selected_agenda"))
+            document.querySelector("#tr-agenda").classList.remove("selected_agenda");
         directionsDisplayMWF.setMap(map);
         directionsDisplayTR.setMap(map);
         setMapOnAll(map);
@@ -191,6 +216,10 @@
             directionsDisplayTR.setMap(null);
           }
         }
+        if(let == 'M' || let == 'W' || let == 'F')
+          document.querySelector("#mwf-agenda").classList.add("selected_agenda");
+        else
+          document.querySelector("#tr-agenda").classList.add("selected_agenda");
       }
 
     </script>
