@@ -68,9 +68,11 @@
       }
       let map;
       let pos;
-      let markers = [];
+      let markersMWF = [];
+      let markersTR = [];
       let colors;
-      let wps = [];
+      let wpsMWF = [];
+      let wpsTR = [];
       let randNum;
       let title;
       let directionsService;
@@ -78,10 +80,10 @@
 
       function initMap() {
 
-        directionsService = new google.maps.DirectionsService;
-        directionsDisplay = new google.maps.DirectionsRenderer;
-        directionsService2 = new google.maps.DirectionsService;
-        directionsDisplay2 = new google.maps.DirectionsRenderer;
+        directionsServiceMWF = new google.maps.DirectionsService;
+        directionsDisplayMWF = new google.maps.DirectionsRenderer;
+        directionsServiceTR = new google.maps.DirectionsService;
+        directionsDisplayTR = new google.maps.DirectionsRenderer;
 
 
           map = new google.maps.Map(document.getElementById('map_canvas'), {
@@ -93,7 +95,7 @@
         {% for course in selected_courseList %}
         console.log({{course.title}});
           randNum = Math.floor(Math.random() * colors.length);
-          title = '{{course.name}}';
+          title = '{{course.name}}: ';
           {% for day in course.days %}
             title += '{{day}}'.toUpperCase();
           {% endfor %}
@@ -109,10 +111,22 @@
             }
           });
           colors.pop(colors[randNum]);
-          markers.push(marker);
+          if(title.indexOf('M', title.indexOf(':')) > -1)
+            markersMWF.push(marker);
+          else
+            markersTR.push(marker);
         {% endfor %}
-        directionsDisplay.setMap(map);
-        directionsDisplay2.setMap(map);
+        directionsDisplayMWF.setMap(map);
+        directionsDisplayTR.setMap(map);
+        displayCustomRoutes(directionsServiceMWF, directionsDisplayMWF, markersMWF);
+        displayCustomRoutes(directionsServiceTR, directionsDisplayTR, markersTR);
+
+
+
+      }
+
+      function displayCustomRoutes(directionsService, directionsDisplay, markers){
+        let wps = [];
         if(markers.length > 1){
           if(markers.length > 2){
             for(let i = 1; i < markers.length - 1; i++){
@@ -123,42 +137,58 @@
             }
           }
           directionsService.route({
-            origin: {lat: markers[0].getPosition().lat(), lng: markers[0].getPosition().lng()},
-            destination: {lat: markers[markers.length - 1].getPosition().lat(), lng: markers[markers.length - 1].getPosition().lng()},
+            origin: markers[0].position,
+            destination: markers[markers.length -  1].position,
             waypoints: wps,
             travelMode: 'WALKING'
           }, function(response, status) {
             if (status === 'OK') {
+              let dirDisplay = new google.maps.DirectionsRenderer({
+                 map: map
+              });
               directionsDisplay.setDirections(response);
             } else {
               window.alert('Directions request failed due to ' + status);
             }
           });
+
         }
 
       }
 
 
-
-
       function setMapOnAll(map) {
-        for (let i = 0; i < markers.length; i++) {
-          markers[i].setMap(map);
+        for (let i = 0; i < markersMWF.length; i++) {
+          markersMWF[i].setMap(map);
+        }
+        for (let i = 0; i < markersTR.length; i++) {
+          markersTR[i].setMap(map);
         }
       }
 
       function deleteMarkers() {
         setMapOnAll(null);
-        directionsDisplay.setMap(null);
-        markers = [];
+        directionsDisplayMWF.setMap(null);
+        directionsDisplayTR.setMap(null);
+        markersMWF, markersTR = [];
       }
 
       function removeAllButLet(let){
+        directionsDisplayMWF.setMap(map);
+        directionsDisplayTR.setMap(map);
         setMapOnAll(map);
-        for(let i = 0; i < markers.length; i++){
-          title = markers[i]['label']['text']
+        for(let i = 0; i < markersMWF.length; i++){
+          title = markersMWF[i]['label']['text']
           if(title.indexOf(let, title.indexOf(':')) == -1){
-            markers[i].setMap(null);
+            markersMWF[i].setMap(null);
+            directionsDisplayMWF.setMap(null);
+          }
+        }
+        for(let i = 0; i < markersTR.length; i++){
+          title = markersTR[i]['label']['text']
+          if(title.indexOf(let, title.indexOf(':')) == -1){
+            markersTR[i].setMap(null);
+            directionsDisplayTR.setMap(null);
           }
         }
       }
