@@ -68,6 +68,8 @@ body {
   position: absolute;
   left: 40px;
   top: 137px;
+  height: 65%;
+  overflow-y: scroll;
 }
 
 .weekdays {

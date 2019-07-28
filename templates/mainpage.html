@@ -20,16 +20,14 @@
     <h3><span class="directions">Enter your CRN(s):</span></h3>
     <form method = "post" action = "/redirect" id= "my-form">
       {% for course in all_courses %}
-        <input type="checkbox" name="CRN{{course.number}}" value="CRN{{course.number}}">{{course.number}} {{course.name}} <br> {{course.time}}<br>
+        <input type="checkbox" name="CRN{{course.number}}" value="CRN{{course.number}}">{{course.number}} {{course.name}} <br> {{course.time}}<br><br>
       {% endfor %}
         <div class="submit">
           <button type="submit" formaction="/redirect">SUBMIT</button><br><br>
         </div>
       </form>
-    </script>
-
-
     </div>
+
     <div class="weekdays">
       <h3> Select the day of the week in which you want to see your route!</h3>
       <div class="btn-group">
@@ -46,7 +44,7 @@
           <p> MON-WED-FRI </p>
           {% for course in selected_courseList %}
             {%if 'm' in course.days%}
-              <p>{{course.name}} {{course.time}}</p>
+              <p id = "S{{course.number}}">{{course.name}} {{course.time}}</p>
             {% endif %}
           {% endfor %}
         </div>
@@ -54,7 +52,7 @@
           <p> TUE-THR </p>
           {% for course in selected_courseList %}
             {%if 't' in course.days%}
-              <p>{{course.name}} {{course.time}}</p>
+              <p id = "S{{course.number}}">{{course.name}} {{course.time}}</p>
             {% endif %}
           {% endfor %}
         </div>
@@ -189,8 +187,15 @@
 
       function deleteMarkers() {
         setMapOnAll(null);
+        if(document.querySelector("#mwf-agenda").classList.contains("selected_agenda"))
+          document.querySelector("#mwf-agenda").classList.remove("selected_agenda");
+        if(document.querySelector("#tr-agenda").classList.contains("selected_agenda"))
+            document.querySelector("#tr-agenda").classList.remove("selected_agenda");
         directionsDisplayMWF.setMap(null);
         directionsDisplayTR.setMap(null);
+        {% for course in selected_courseList%}
+          document.querySelector("#S{{course.number}}").remove();
+        {% endfor %}
         markersMWF, markersTR = [];
       }
 
