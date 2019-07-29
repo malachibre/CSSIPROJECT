@@ -39,6 +39,11 @@ template_dict = {
     'bld_locs': buildings
 }
 
+class WelcomeHandler(webapp2.RequestHandler):
+    def get(self):
+        main_template = jinja_env.get_template("templates/welcomePage.html")
+        self.response.write(main_template.render(template_dict))
+
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         main_template = jinja_env.get_template("templates/mainpage.html")
@@ -65,6 +70,7 @@ class SeedData(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
+    ('/welcome', WelcomeHandler),
     ('/redirect', RedirectHandler),
     ('/seeddata', SeedData)
 ], debug=True)
