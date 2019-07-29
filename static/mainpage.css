@@ -5,6 +5,10 @@ body {
   align-items: left;
 }
 
+#my-form{
+
+}
+
 #map_canvas {
   width: 800px;
   height: 600px;
@@ -58,8 +62,9 @@ body {
 }
 
 .form {
-
+  
 }
+
 
 .weekdays {
   border: 5px solid;
