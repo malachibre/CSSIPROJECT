@@ -110,7 +110,7 @@ h2 {
   left: 635px;
   font-family: 'Baloo', cursive;
   font-size: 40px;
-  color: white;
+  color: black;
 }
 
 #Confirmation {
@@ -127,7 +127,7 @@ h2 {
 }
 
 .Letters {
-  color: black;
+  color: #FF1919;
 }
 
 .submit {
