@@ -77,11 +77,8 @@ class SeedData(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
-<<<<<<< HEAD
     ('/home', HomeHandler),
-=======
     ('/welcome', WelcomeHandler),
->>>>>>> f2dbd134a17d99f0243d920d3e51033ed5bee673
     ('/redirect', RedirectHandler),
     ('/seeddata', SeedData)
 ], debug=True)
