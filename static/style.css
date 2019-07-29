@@ -1,12 +1,12 @@
 body {
-  background-color: rgb(176,62, 66);
+  /* background-color: rgb(176,62, 66); */
   display: flex;
   flex-direction: column;
   align-items: left;
   font-family: 'Acme', sans-serif;
-  /* background-image: linear-gradient(0deg, rgba(176,62,66,1), rgba(169,169,169,1)); /* Standard syntax (must be last) */
-  /* background-repeat: no-repeat; */
-
+  background-image: url("background.jpg");
+  background-position: center;
+  background-attachment: fixed;
 }
 
 #map_canvas {
@@ -24,7 +24,8 @@ body {
 #addCRN {
   position: absolute;
   right: 20px;
-  bottom:80px;
+  bottom:170px;
+  background: white;
 }
 
 #logo {
@@ -64,18 +65,38 @@ body {
   padding: 4.5px;
   width: 150px;
   text-align: center;
+  position: absolute;
+  left: 40px;
+  top: 137px;
+  height: 65%;
+  overflow-y: scroll;
 }
 
 .weekdays {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border: 5px solid;
   border-radius: 8px;
   width: 400px;
   position: fixed;
   top: 137px;
-  left: 240px;
+  left: 320px;
   padding: 10px;
   font-family: 'Acme', sans-serif
   ;
+}
+
+.schedule{
+  margin-top: 20px;
+  width: 80%;
+  height: 400px;
+  border: 5px solid black;
+}
+
+.selected_agenda{
+  background-color: green;
+  opacity: .5;
 }
 
 .btn-group {
@@ -86,7 +107,7 @@ body {
 h2 {
   position: fixed;
   top: 0px;
-  left: 550px;
+  left: 612px;
   font-family: 'Baloo', cursive;
   font-size: 40px;
   color: white;
@@ -94,15 +115,15 @@ h2 {
 
 #Confirmation {
   position: fixed;
-  top: 37%;
-  left: 35%;
-  font-family: 'Oswald', sans-serif;
-
+  top: 27%;
+  left: 38%;
+  font-family: 'Acme', sans-serif;
+  color: white;
 }
 
 #backButton {
   position: fixed;
-  left: 46%
+  left: 47%
 }
 
 .Letters {
@@ -115,4 +136,9 @@ h2 {
 
 .directions {
   text-align: left;
+}
+
+body.acb {
+  background-color: black;
+  background-image: url(giphy.gif);
 }

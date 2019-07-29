@@ -21,16 +21,14 @@
     <h3><span class="directions">Enter your CRN(s):</span></h3>
     <form method = "post" action = "/redirect" id= "my-form">
       {% for course in all_courses %}
-        <input type="checkbox" name="CRN{{course.number}}" value="CRN{{course.number}}">{{course.number}} {{course.name}}<br>
+        <input type="checkbox" name="CRN{{course.number}}" value="CRN{{course.number}}">{{course.number}} {{course.name}} <br> {{course.time}}<br><br>
       {% endfor %}
         <div class="submit">
           <button type="submit" formaction="/redirect">SUBMIT</button><br><br>
         </div>
       </form>
-    </script>
-
-
     </div>
+
     <div class="weekdays">
       <h3> Select the day of the week in which you want to see your route!</h3>
       <div class="btn-group">
@@ -40,7 +38,31 @@
         <button onclick="removeAllButLet('T');">Thursday</button><br>
         <button onclick="removeAllButLet('F');">Friday</button><br>
       </div>
+      <div class = "schedule">
+        <center>
+          <div style="width: 100%; height: 5%; font-size: 30px;"> schedule </div>
+          <div id = "mwf-agenda">
+          <p> MON-WED-FRI </p>
+          {% for course in selected_courseList %}
+            {%if 'm' in course.days%}
+              <p id = "S{{course.number}}">{{course.name}} {{course.time}}</p>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div id = 'tr-agenda'>
+          <p> TUE-THR </p>
+          {% for course in selected_courseList %}
+            {%if 't' in course.days%}
+              <p id = "S{{course.number}}">{{course.name}} {{course.time}}</p>
+            {% endif %}
+          {% endfor %}
+        </div>
+         </center>
+      </div>
     </div>
+
+    <input id="addCRN" type="button" value="DELETE COURSES" onclick="deleteMarkers();"/>
+
 
       <div id="map_canvas" style="width: 800px; height:600px; border-radius: 5px;"></div>
       <div id="login_button" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
@@ -66,9 +88,11 @@
       }
       let map;
       let pos;
-      let markers = [];
+      let markersMWF = [];
+      let markersTR = [];
       let colors;
-      let wps = [];
+      let wpsMWF = [];
+      let wpsTR = [];
       let randNum;
       let title;
       let directionsService;
@@ -76,8 +100,11 @@
 
       function initMap() {
 
-        directionsService = new google.maps.DirectionsService;
-        directionsDisplay = new google.maps.DirectionsRenderer;
+        directionsServiceMWF = new google.maps.DirectionsService;
+        directionsDisplayMWF = new google.maps.DirectionsRenderer;
+        directionsServiceTR = new google.maps.DirectionsService;
+        directionsDisplayTR = new google.maps.DirectionsRenderer;
+
 
           map = new google.maps.Map(document.getElementById('map_canvas'), {
           zoom: 15,
@@ -88,7 +115,7 @@
         {% for course in selected_courseList %}
         console.log({{course.title}});
           randNum = Math.floor(Math.random() * colors.length);
-          title = '{{course.name}}';
+          title = '{{course.name}}: ';
           {% for day in course.days %}
             title += '{{day}}'.toUpperCase();
           {% endfor %}
@@ -104,53 +131,100 @@
             }
           });
           colors.pop(colors[randNum]);
-          markers.push(marker);
+          if(title.indexOf('W', title.indexOf(':')) > -1)
+            markersMWF.push(marker);
+          else
+            markersTR.push(marker);
         {% endfor %}
-        directionsDisplay.setMap(map);
+        directionsDisplayMWF.setMap(map);
+        directionsDisplayTR.setMap(map);
+        displayCustomRoutes(directionsServiceMWF, directionsDisplayMWF, markersMWF);
+        displayCustomRoutes(directionsServiceTR, directionsDisplayTR, markersTR);
+
+
+
+      }
+
+      function displayCustomRoutes(directionsService, directionsDisplay, markers){
+        let wps = [];
         if(markers.length > 1){
           if(markers.length > 2){
             for(let i = 1; i < markers.length - 1; i++){
               wps.push({
-                location: {lat: markers[i].getPosition().lat(), lng: markers[i].getPosition().lng()},
+                location: markers[i].position,
                 stopover: true
               });
             }
           }
           directionsService.route({
-            origin: {lat: markers[0].getPosition().lat(), lng: markers[0].getPosition().lng()},
-            destination: {lat: markers[marker.length - 1].getPosition().lat(), lng: markers[marker.length - 1].getPosition().lng()},
+            origin: markers[0].position,
+            destination: markers[markers.length -  1].position,
             waypoints: wps,
             travelMode: 'WALKING'
           }, function(response, status) {
             if (status === 'OK') {
+              let dirDisplay = new google.maps.DirectionsRenderer({
+                 map: map
+              });
               directionsDisplay.setDirections(response);
             } else {
               window.alert('Directions request failed due to ' + status);
             }
           });
+
         }
+
       }
 
       function setMapOnAll(map) {
-        for (let i = 0; i < markers.length; i++) {
-          markers[i].setMap(map);
+        for (let i = 0; i < markersMWF.length; i++) {
+          markersMWF[i].setMap(map);
+        }
+        for (let i = 0; i < markersTR.length; i++) {
+          markersTR[i].setMap(map);
         }
       }
 
       function deleteMarkers() {
         setMapOnAll(null);
-        directionsDisplay.setMap(null);
-        markers = [];
+        if(document.querySelector("#mwf-agenda").classList.contains("selected_agenda"))
+          document.querySelector("#mwf-agenda").classList.remove("selected_agenda");
+        if(document.querySelector("#tr-agenda").classList.contains("selected_agenda"))
+            document.querySelector("#tr-agenda").classList.remove("selected_agenda");
+        directionsDisplayMWF.setMap(null);
+        directionsDisplayTR.setMap(null);
+        {% for course in selected_courseList%}
+          document.querySelector("#S{{course.number}}").remove();
+        {% endfor %}
+        markersMWF, markersTR = [];
       }
 
       function removeAllButLet(let){
+        if(document.querySelector("#mwf-agenda").classList.contains("selected_agenda"))
+          document.querySelector("#mwf-agenda").classList.remove("selected_agenda");
+        if(document.querySelector("#tr-agenda").classList.contains("selected_agenda"))
+            document.querySelector("#tr-agenda").classList.remove("selected_agenda");
+        directionsDisplayMWF.setMap(map);
+        directionsDisplayTR.setMap(map);
         setMapOnAll(map);
-        for(let i = 0; i < markers.length; i++){
-          title = markers[i]['label']['text']
+        for(let i = 0; i < markersMWF.length; i++){
+          title = markersMWF[i]['label']['text']
           if(title.indexOf(let, title.indexOf(':')) == -1){
-            markers[i].setMap(null);
+            markersMWF[i].setMap(null);
+            directionsDisplayMWF.setMap(null);
           }
         }
+        for(let i = 0; i < markersTR.length; i++){
+          title = markersTR[i]['label']['text']
+          if(title.indexOf(let, title.indexOf(':')) == -1){
+            markersTR[i].setMap(null);
+            directionsDisplayTR.setMap(null);
+          }
+        }
+        if(let == 'M' || let == 'W' || let == 'F')
+          document.querySelector("#mwf-agenda").classList.add("selected_agenda");
+        else
+          document.querySelector("#tr-agenda").classList.add("selected_agenda");
       }
 
     </script>
