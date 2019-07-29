@@ -42,6 +42,7 @@ template_dict = {
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+        template_dict['selected_courseList'] = []
         main_template = jinja_env.get_template("templates/mainpage.html")
         self.response.write(main_template.render(template_dict))
 
@@ -58,6 +59,11 @@ class RedirectHandler(webapp2.RequestHandler):
         template_dict['selected_courseList'] = selected
         self.response.write(redirect_template.render(template_dict))
 
+class HomeHandler(webapp2.RequestHandler):
+    def get(self):
+        main_template = jinja_env.get_template("templates/mainpage.html")
+        self.response.write(main_template.render(template_dict))
+
 class SeedData(webapp2.RequestHandler):
     def get(self):
         seed_data()
@@ -66,6 +72,7 @@ class SeedData(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
+    ('/home', HomeHandler),
     ('/redirect', RedirectHandler),
     ('/seeddata', SeedData)
 ], debug=True)
