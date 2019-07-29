@@ -40,6 +40,11 @@ template_dict = {
     'bld_locs': buildings
 }
 
+class WelcomeHandler(webapp2.RequestHandler):
+    def get(self):
+        main_template = jinja_env.get_template("templates/welcomePage.html")
+        self.response.write(main_template.render(template_dict))
+
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         template_dict['selected_courseList'] = []
@@ -72,7 +77,11 @@ class SeedData(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
+<<<<<<< HEAD
     ('/home', HomeHandler),
+=======
+    ('/welcome', WelcomeHandler),
+>>>>>>> f2dbd134a17d99f0243d920d3e51033ed5bee673
     ('/redirect', RedirectHandler),
     ('/seeddata', SeedData)
 ], debug=True)
