@@ -33,6 +33,7 @@ buildings = {
     1041:  [33.944413, -83.375468],
 }
 
+
 template_dict = {
     'all_courses': CRN.query().order(CRN.name).order(CRN.time).fetch(),
     'selected_courseList': [],
